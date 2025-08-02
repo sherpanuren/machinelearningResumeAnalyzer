@@ -1,6 +1,7 @@
-# Resume Classifier Using Machine Learning
 
-This project uses a machine learning classifier to categorize resumes into predefined job categories based on their content. The classifier is trained using various NLP techniques such as **TF-IDF** for feature extraction and a supervised learning algorithm (e.g., **SVM**, **Random Forest**, etc.) for classification.
+# Resume Analyzer using NLP
+
+This project uses a machine learning classifier to categorize resumes into predefined job categories based on their content. The classifier is trained using various NLP techniques such as **TF-IDF** for feature extraction and a supervised learning algorithm for classification.
 
 ## Project Overview
 
@@ -18,46 +19,59 @@ Make sure you have **Python** installed on your system. You'll also need to inst
 
 ```bash
 pip install numpy pandas scikit-learn nltk pickle-mixin
+````
 
-How to Use
-Step 1: Load the Classifier
-The first step is to load the trained classifier that was saved using pickle.
+### Files in the Repository
 
-python
-Copy code
+* **clf.pkl**: The trained machine learning classifier model.
+* **resume\_classifier.py**: The Python script that loads the model, preprocesses the resume, and makes predictions.
+* **myresume.txt**: A sample resume file (replace with your actual resume text).
+* **cleanResume()**: A function used to preprocess the input resume text before prediction.
+
+## How to Use
+
+### Step 1: Load the Classifier
+
+The first step is to load the trained classifier that was saved using **pickle**.
+
+```python
 import pickle
 
 # Load the trained classifier
 clf = pickle.load(open('clf.pkl', 'rb'))
-Step 2: Clean the Input Resume
+```
+
+### Step 2: Clean the Input Resume
+
 Next, you need to clean the resume text before making predictions. The cleaning process might involve:
 
-Tokenization
+* **Tokenization**
+* **Removal of stopwords**
+* **Lowercasing and stemming**
 
-Removal of stopwords
-
-Lowercasing and stemming
-
-python
-Copy code
+```python
 # Clean the input resume
 cleaned_resume = cleanResume(myresume)
-Ensure that the function cleanResume() is implemented to process the resume properly (e.g., removing unwanted characters, stopwords, etc.).
+```
 
-Step 3: Transform the Cleaned Resume
-The cleaned resume text is then transformed into a feature vector using the TF-IDF vectorizer that was used to train the model.
+Ensure that the function `cleanResume()` is implemented to process the resume properly (e.g., removing unwanted characters, stopwords, etc.).
 
-python
-Copy code
+### Step 3: Transform the Cleaned Resume
+
+The cleaned resume text is then transformed into a feature vector using the **TF-IDF vectorizer** that was used to train the model.
+
+```python
 # Transform the cleaned resume using the trained TfidfVectorizer
 input_features = tfidf.transform([cleaned_resume])
-Ensure that the tfidf object used in training the model is loaded or available in the environment.
+```
 
-Step 4: Make the Prediction
+Ensure that the `tfidf` object used in training the model is loaded or available in the environment.
+
+### Step 4: Make the Prediction
+
 The classifier then predicts the job category based on the input resume features. The prediction is a category ID, which can be mapped to the corresponding job category name.
 
-python
-Copy code
+```python
 # Make the prediction using the loaded classifier
 prediction_id = clf.predict(input_features)[0]
 
@@ -102,24 +116,30 @@ category_name = category_mapping.get(prediction_id, "Unknown")
 
 print("Predicted Category:", category_name)
 print(prediction_id)
-Sample Output:
-If the resume text matches the job description of a Data Scientist, the prediction output would look like this:
+```
 
-bash
-Copy code
+### Sample Output:
+
+If the resume text matches the job description of a **Data Scientist**, the prediction output would look like this:
+
+```bash
 Predicted Category: Data Science
 Prediction ID: 12
-Step 5: Customize for Your Own Resumes
-To classify your own resume, replace myresume with the path to your resume file or directly provide the text to the function.
+```
 
-python
-Copy code
+### Step 5: Customize for Your Own Resumes
+
+To classify your own resume, replace `myresume` with the path to your resume file or directly provide the text to the function.
+
+```python
 myresume = "path_to_resume.txt"
-Example Resume Classifier Script:
-Here’s an example script (resume_classifier.py) that ties everything together:
+```
 
-python
-Copy code
+### Example Resume Classifier Script:
+
+Here’s an example script (`resume_classifier.py`) that ties everything together:
+
+```python
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -178,19 +198,34 @@ category_name = category_mapping.get(prediction_id, "Unknown")
 
 # Output the predicted category
 print(f"Predicted Category: {category_name}")
-Conclusion
-This project classifies resumes into predefined job categories using a machine learning classifier.
+```
 
-The classifier is trained using TF-IDF and a supervised model, and predictions are based on the input resume.
+## Conclusion
 
-Future improvements could include using more sophisticated models like BERT or GPT for semantic analysis.
+* This project classifies resumes into predefined job categories using a machine learning classifier.
+* The classifier is trained using **TF-IDF** and a supervised model, and predictions are based on the input resume.
+* Future improvements could include using more sophisticated models like **BERT** or **GPT** for semantic analysis.
 
-License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+## License
 
-Acknowledgements
-Scikit-learn for machine learning tools like the classifier and TF-IDF vectorizer.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-Pickle for saving and loading models.
+## Acknowledgements
 
-NLTK/Spacy for text preprocessing and tokenization.
+* **Scikit-learn** for machine learning tools like the classifier and TF-IDF vectorizer.
+* **Pickle** for saving and loading models.
+* **NLTK/Spacy** for text preprocessing and tokenization.
+
+````
+
+---
+
+### Steps to Follow:
+1. Copy and paste the above content into your **`README.md`** file.
+2. Save and commit the changes to GitHub using the following commands:
+
+```bash
+git add README.md
+git commit -m "Added usage instructions and example script"
+git push origin main
+````
